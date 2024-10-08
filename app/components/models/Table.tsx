@@ -1,8 +1,18 @@
 import React from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
+import { Mesh } from 'three';
 
-export default function Table(props) {
-  const { nodes, materials } = useGLTF('/models/table.glb')
+const Table:React.FC<Model> = (props) => {
+  const { nodes, materials } = useGLTF('/models/table.glb') as unknown as {
+    nodes: {
+      Cube029: Mesh;
+      Cube028: Mesh;
+      Cube012: Mesh;
+      Cube011: Mesh;
+      Cube001: Mesh;
+    };
+    materials: any;
+  };
   const tableMap = useTexture({ aoMap:"/images/table/ao.jpg", lightMap:"/images/table/lightmap.jpg"});
   const legMap = useTexture({ aoMap:"/images/table_legs/ao.jpg", lightMap:"/images/table_legs/lightmap.jpg"});
   tableMap.aoMap.flipY = false;
@@ -59,3 +69,4 @@ export default function Table(props) {
 
 useGLTF.preload('/models/table.glb')
 
+export default Table;

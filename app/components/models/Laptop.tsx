@@ -2,13 +2,23 @@ import React from 'react'
 import { useGLTF, useScroll, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 import { Color } from '../utils/Color';
+import { Mesh } from 'three';
 
-export default function Laptop(props) {
+const Laptop:React.FC<Model> = (props) => {
   const scroll = useScroll();
   const [ emissiveIntensity, setIntensity] = React.useState(100);
   const [ color, setColor] = React.useState(new Color(141, 92, 214));
 
-  const { nodes, materials } = useGLTF('/models/laptop.glb');
+  const { nodes, materials } = useGLTF('/models/laptop.glb') as unknown as {
+    nodes: {
+      Cube035: Mesh;
+      Cube034: Mesh;
+      Cube033: Mesh;
+      Cube032: Mesh;
+      Cube031: Mesh;
+    };
+    materials: any;
+  };
   const laptopMap = useTexture({ lightMap:"/images/laptop/lightmap.jpg"});
   const laptopScreen = useTexture({ emissiveMap:"/images/laptop/emit.jpg"});
   
@@ -67,3 +77,4 @@ export default function Laptop(props) {
 
 useGLTF.preload('/models/laptop.glb')
 
+export default Laptop;

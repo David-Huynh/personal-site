@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three';
 
-export default function Shelf(props) {
+const Shelf:React.FC<Model> = (props) => {
   const sceneRef = useRef<THREE.Object3D | undefined>();
   const { scene } = useGLTF('/models/shelf.glb')
   const textures = useTexture({ aoMap:"/images/shelf/ao.jpg", lightMap:"/images/shelf/lightmap.jpg"});
@@ -36,3 +36,5 @@ export default function Shelf(props) {
 }
 
 useGLTF.preload('/models/shelf.glb')
+
+export default Shelf;

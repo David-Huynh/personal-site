@@ -3,7 +3,7 @@ import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three';
 
 
-export default function Window(props) {
+const Window:React.FC<Model> = (props) => {
   const sceneRef = useRef<THREE.Object3D | undefined>();
   const { scene } = useGLTF('/models/window.glb')
   const textures = useTexture({ aoMap:"/images/window/ao.jpg", lightMap:"/images/window/lightmap.jpg"});
@@ -35,3 +35,5 @@ export default function Window(props) {
 }
 
 useGLTF.preload('/models/window.glb')
+
+export default Window;

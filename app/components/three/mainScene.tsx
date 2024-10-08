@@ -26,11 +26,6 @@ export function MainScene() {
             <EffectComposer>
                 <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.9} height={300} />
             </EffectComposer>
-            {/* <Suspense fallback={null}>
-                <ScrollControls pages={1} maxSpeed={1}>
-                    <FullRoom position={[1.5,-2.4,0.4]}/>
-                </ScrollControls>
-            </Suspense> */}
         </>
     )
 }

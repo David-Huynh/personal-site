@@ -1,8 +1,16 @@
 import React from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
+import { Mesh } from 'three';
 
-export default function Apron(props) {
-  const { nodes, materials } = useGLTF('/models/apron.glb')
+const Apron:React.FC<Model>= (props) =>{
+  const { nodes, materials } = useGLTF('/models/apron.glb') as unknown as {
+    nodes: {
+      Plane005: Mesh;
+      Plane004: Mesh;
+      Cylinder003: Mesh;
+    };
+    materials: any;
+  };
   const textures = useTexture({ aoMap:"/images/apron/ao.jpg", lightMap:"/images/apron/lightmap.jpg"});
   textures.aoMap.flipY = false;
   textures.lightMap.flipY = false;
@@ -38,3 +46,5 @@ export default function Apron(props) {
 }
 
 useGLTF.preload('/models/apron.glb')
+
+export default Apron;

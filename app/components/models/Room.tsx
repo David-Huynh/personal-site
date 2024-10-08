@@ -1,10 +1,17 @@
 import React from 'react'
 import { useGLTF, useScroll, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
+import { Mesh } from 'three';
 
-export default function Room(props) {
+const Room:React.FC<Model> = (props) =>{
   const scroll = useScroll()
-  const { nodes, materials } = useGLTF('/models/room.glb')
+  const { nodes, materials } = useGLTF('/models/room.glb') as unknown as {
+    nodes: {
+      Plane: Mesh;
+      Cube002: Mesh;
+    };
+    materials: any;
+  };
   const wallMap = useTexture({ aoMap:"/images/wall/ao.jpg", lightMap:"/images/wall/lightmap.jpg"});
   const floorMap = useTexture({ aoMap:"/images/floor/ao.jpg", lightMap:"/images/floor/lightmap.jpg"});
 
@@ -39,3 +46,5 @@ export default function Room(props) {
 }
 
 useGLTF.preload('/models/room.glb')
+
+export default Room;

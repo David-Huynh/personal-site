@@ -1,8 +1,20 @@
 import React from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
+import { Mesh } from 'three';
 
-export default function Bed(props) {
-  const { nodes, materials } = useGLTF('/models/bed.glb')
+const Bed:React.FC<Model> = (props) => {
+  const { nodes, materials } = useGLTF('/models/bed.glb') as unknown as {
+    nodes: {
+      Plane003: Mesh;
+      Plane001: Mesh;
+      Cube008: Mesh;
+      Cube007: Mesh;
+      Cube006: Mesh;
+      Cube005: Mesh;
+      Cube004: Mesh;
+    };
+    materials: any;
+  };
   const textures = useTexture({ aoMap:"/images/bed/ao.jpg", lightMap:"/images/bed/lightmap.jpg"});
   textures.aoMap.flipY = false;
   textures.lightMap.flipY = false;
@@ -70,3 +82,5 @@ export default function Bed(props) {
 }
 
 useGLTF.preload('/models/bed.glb')
+
+export default Bed;

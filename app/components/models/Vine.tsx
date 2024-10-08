@@ -1,8 +1,16 @@
 import React from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
+import { Mesh } from 'three';
 
-export default function Vine(props) {
-  const { nodes, materials } = useGLTF('/models/vine.glb')
+const Vine:React.FC<Model> = (props) => {
+  const { nodes, materials } = useGLTF('/models/vine.glb') as unknown as {
+    nodes: {
+      Cylinder: Mesh;
+      BézierCurve002: Mesh;
+      BézierCurve002_1: Mesh;
+    };
+    materials: any;
+  };
   const vineText = useTexture({ aoMap:"/images/vine/ao.jpg", lightMap:"/images/vine/lightmap.jpg"});
   const potText = useTexture({ aoMap:"/images/pot/ao.jpg", lightMap:"/images/pot/lightmap.jpg"});
   vineText.aoMap.flipY = false;
@@ -41,3 +49,5 @@ export default function Vine(props) {
 }
 
 useGLTF.preload('/models/vine.glb')
+
+export default Vine;
